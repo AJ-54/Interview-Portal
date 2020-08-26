@@ -8,7 +8,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Upcoming Interviews</title>
+    <title>Update Interviews</title>
 </head>
 <body style="background-color:powderblue;">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -28,38 +28,39 @@
               <a class="nav-link" href="{% url 'update_interview' %}">Edit Interviews</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-            </li>
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              </li>
           </ul>
         </div>
       </nav>
 
     <div class="container" style="margin-top: 10px;">
-      <span style="font-size: 50px; font-weight: lighter;display:block;text-align: center;">Upcoming Interviews</span>
-      <hr style="border: 1px solid rgb(26, 13, 104); width: 30%;">
+        <span style="font-size: 50px; font-weight: lighter;display:block;text-align: center;">Edit Existing Interviews</span>
+        <hr style="border: 1px solid rgb(26, 13, 104); width: 30%;">
         <div class="row" style="margin-top: 20px;">
-        {% for interview in interviews %}
-          <div class="col-md-4">
-              <div class="card  shadow bg-white rounded" style="width: 22rem; margin: 10px">
-                  <div class="card-body">
-                  <h5 class="card-title">{{interview.name}}</h5>
-                  <p class="card-text">
-                  <ul>
-                      <li> Start Time: {{interview.start_time}} </li>
-                      <li> End Time: {{interview.end_time}} </li>
-                  </ul>
-                  </p>
-                  <h6> Participants - </h6>
-                  <ul>
-                      {% for participant in interview.participant.all %}
-                      <li> {{participant.name}} </li>
-                      {% endfor %}
-                  </ul> 
-                  </div>
-              </div>
-          </div>
-          {% endfor %}
-      </div>
+            {% for interview in interviews %}
+            <div class="col-md-4"> 
+                <div class="card shadow bg-white rounded" style="width: 22rem; margin: 10px">
+                    <div class="card-body">
+                        <h5 class="card-title">{{interview.name}}</h5>
+                        <p class="card-text">
+                        <ul>
+                            <li> Start Time: {{interview.start_time}} </li>
+                            <li> End Time: {{interview.end_time}} </li>
+                        </ul>
+                        </p>
+                        <h6> Participants - </h6>
+                        <ul>
+                            {% for participant in interview.participant.all %}
+                            <li> {{participant.name}} </li>
+                            {% endfor %}
+                        </ul> 
+                        <a href = "{% url 'update_one_interview' pk=interview.id %}"><button type="button" class="btn btn-outline-primary">Edit Interview</button></a> 
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </body>
 </html>

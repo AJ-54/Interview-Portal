@@ -8,9 +8,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Home Page</title>
 </head>
-<body>
+<body style="background-color:powderblue;">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -25,7 +25,10 @@
               <a class="nav-link" href="{% url 'all_interviews' %}">All Upcoming Interviews</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Edit Interviews</a>
+              <a class="nav-link" href="{% url 'update_interview' %}">Edit Interviews</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
             </li>
             
           </ul>
@@ -36,16 +39,16 @@
         <section>
             <div class="row">
                 <div class="col-md-7">
-                    <img src="{% static "images/scalar.png" %}" width="80%" height=300px style="vertical-align: middle;">
+                    <img src="{% static 'images/scalar.png' %}" width="80%" height=300px style="vertical-align: middle;">
                 </div>
                 <div class="col-md-5">
-                    <span style="font-size:20px;">InterviewBit</span>
-                    <hr align="left" style="border: 1px solid skyblue; width: 10%;"><br>
-                    <p style="font-size: 35px;font-weight:500;">Welcome to Interview Portal</p>
+                    <span style="font-size:30px;">InterviewBit</span>
+                    <hr align="left" style="border: 1px solid skyblue; width: 20%;">
+                    <p style="font-size: 35px;font-weight:300;">Welcome to Interview Portal</p>
                     <br>
                     <p> <a href = "{% url 'create' %}"><button type="button" class="btn btn-outline-primary">Create New Interview</button> </a></p>
                     <p> <a href = "{% url 'all_interviews' %}"><button type="button" class="btn btn-outline-primary">Display All Interviews </button> </a></p>
-                    <p> <a href = "{% url 'all_interviews' %}"><button type="button" class="btn btn-outline-primary">Change Any Interview</button> </a></p>
+                    <p> <a href = "{% url 'update_interview' %}"><button type="button" class="btn btn-outline-primary">Change Any Interview</button> </a></p>
                 </div>
             </div>
         </section>

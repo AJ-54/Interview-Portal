@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -102,9 +103,17 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# EMAIL SETTINGS
+SENDGRID_API_KEY = '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'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
