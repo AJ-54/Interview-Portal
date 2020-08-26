@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    <!-- XDSoft DateTimePicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Interview</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <li class ="navbar-brand">Interview Management Portal</li>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">  
+            <li class="nav-item">
+              <a class="nav-link" href="#">Create New Interview<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'all_interviews' %}">All Upcoming Interviews</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Edit Interviews</a>
+            </li>
+            
+          </ul>
+        </div>
+    </nav>
+    <div class="container" style="margin-top: 100px;">
+        {% if names %}
+            <h3> Error In Creating This Interview </h3>
+            <hr>
+            <h5> Following Participants are having conflicts with given Time of Interview </h5>
+            <ol>
+                {% for name in names %}
+                    <li> {{name}} </li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+    </div>
+
+    <div class="container" style="margin-top: 100px;">
+        <form method="POST">
+            {% csrf_token %}
+            <div> 
+                {% comment %} <div id="duplicater">
+                    <label for="participant">Choose Participant:</label>
+                    <select name="participant" id="participant">
+                        {% for field in form.participant %}
+                            <option value= {{field}}> {{field}} </option>
+                        {% endfor %}
+                    </select> 
+                </div> {% endcomment %}
+
+                {{form.as_p}}
+                {% comment %} <input type="datetime-local" id="start" name="start"> {{form.start}} </input>
+                <input type="datetime-local" id="start" name="start"> {{form.end}} </input> {% endcomment %}
+                {% comment %} <button id="button" onclick="duplicate()">Add more</button> {% endcomment %}
+            </div>
+            
+            <br>
+            {% comment %} <label>{{form.start.label_tag}} </label>
+            {{form.start}}
+            <br>
+            <label>{{form.end.label_tag}} </label>
+            {{form.end}} {% endcomment %}
+            <input type="submit" name="Submit" value="Submit">
+            
+        </form>
+    </div>
+
+    <script>
+        $(function () {
+            $("#id_start").datetimepicker({
+            format: 'd/m/Y H:i',
+            });
+        });
+        $(function () {
+            $("#id_end").datetimepicker({
+            format: 'd/m/Y H:i',
+            });
+        });
+        var i = 0;
+        var original = document.getElementById('duplicater');
+        function duplicate(){
+            var clone = original.cloneNode(true); // "deep" clone
+            clone.id = "duplicater" + ++i;
+            original.parentNode.appendChild(clone);
+        }
+    </script>
+</body>
+</html>
