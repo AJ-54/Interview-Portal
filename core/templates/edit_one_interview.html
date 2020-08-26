@@ -64,7 +64,9 @@
     </div>
     {% endif %}
 
-    <div class="container" style="margin-top: 100px;">
+    <div class="container" style="margin-top: 10px;">
+        <span style="font-size: 50px; font-weight: lighter;display:block;text-align: center;">Editing Interview - {{obj.name}} </span>
+        <hr style="border: 1px solid rgb(26, 13, 104); width: 30%;">
         <form method="POST">
             {% csrf_token %}
             <div id="div_id_Title" class="control-group">
