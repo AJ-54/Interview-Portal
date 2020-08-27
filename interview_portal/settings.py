@@ -73,7 +73,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'interview_portal.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -83,7 +82,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -103,15 +101,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # EMAIL SETTINGS
-SENDGRID_API_KEY = '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'
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
 EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -124,7 +120,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

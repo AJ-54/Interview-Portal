@@ -63,6 +63,14 @@
     </div>
     {% endif %}
 
+    {% if invalidtime %}
+    <div class="container" style="margin-top: 50px;">
+            <h3> Error In Creating This Interview </h3>
+            <hr>
+            <h5> Please select Valid Time in Future with End Time greater than Start Time </h5>
+    </div>
+    {% endif %}
+
     <div class="container" style="margin-top: 10px;">
         <span style="font-size: 50px; font-weight: lighter;display:block;text-align: center;">Create New Interview</span>
             <hr style="border: 1px solid rgb(26, 13, 104); width: 30%;">

@@ -138,6 +138,15 @@ def create_view(request):
 
             start_time = convert_to_datetime(request, start_time)
             end_time = convert_to_datetime(request, end_time)
+            curr_time = datetime.now()
+
+            if (end_time < start_time or start_time < curr_time):
+                form = InterviewForm()
+                context = {
+                    'form' : form,
+                    'invalidtime' : True,
+                }
+                return render(request,'create_interviews.html', context)
 
             invalid_ids = check_conflicts(request,participant_pk, start_time, end_time)
 
@@ -215,6 +224,15 @@ def update_one_interview_view(request, pk):
             start_time = interview_obj.start_time
         if (end_time == "old"):
             end_time = interview_obj.end_time
+
+        curr_time = datetime.now()
+        if (end_time < start_time or start_time < curr_time):
+                context = {
+                    'obj' : interview_obj,
+                    'participants' : participants,
+                    'invalidtime' : True,
+                }
+                return render(request,'edit_one_interview.html', context)
         
         invalid_ids = check_updates_conflicts(request, participant_pk, start_time, end_time, pk)
 
